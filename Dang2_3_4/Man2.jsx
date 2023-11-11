@@ -11,6 +11,7 @@ import axios from 'axios'
 const Man2 = (props) => {
   const { navigation, route } = props
   const { navigate, goBack } = navigation
+  const { type, id } = route.params
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -32,6 +33,21 @@ const Man2 = (props) => {
     }
   }
 
+  const updateData = async (id) => {
+    try {
+      const updatedUser = {
+        name: name,
+        description: description,
+      }
+      await axios.put(
+        `https://654efe92358230d8f0ccf0fb.mockapi.io/Login/filter/${id}`,
+        updatedUser
+      )
+    } catch (error) {
+      console.error('Error updating data:', error)
+    }
+  }
+
   return (
     <View
       style={{
@@ -47,7 +63,7 @@ const Man2 = (props) => {
           color: '#111',
         }}
       >
-        Thêm
+        {type == 'Thêm' ? 'Thêm' : 'Sửa'}
       </Text>
       <TextInput
         onChangeText={(text) => {
@@ -79,22 +95,42 @@ const Man2 = (props) => {
         placeholder="Nhập tên ..."
         placeholderTextColor="#111"
       />
-      <TouchableOpacity
-        style={{
-          marginTop: 30,
-          marginBottom: 30,
-          width: 300,
-          height: 45,
-          backgroundColor: '#ff8eb9',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        onPress={() => {
-          addNewEntry()
-        }}
-      >
-        <Text>Thêm</Text>
-      </TouchableOpacity>
+      {id == -1 ? (
+        <TouchableOpacity
+          style={{
+            marginTop: 30,
+            marginBottom: 30,
+            width: 300,
+            height: 45,
+            backgroundColor: '#ff8eb9',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => {
+            addNewEntry()
+          }}
+        >
+          <Text>Thêm</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={{
+            marginTop: 30,
+            marginBottom: 30,
+            width: 300,
+            height: 45,
+            backgroundColor: '#ff8eb9',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => {
+            updateData(id)
+            navigate('Dang2_3_4')
+          }}
+        >
+          <Text>Sửa</Text>
+        </TouchableOpacity>
+      )}
     </View>
   )
 }

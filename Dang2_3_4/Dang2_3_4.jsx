@@ -138,6 +138,7 @@ const Dang2_3_4 = (props) => {
           )
           .map((item) => {
             return (
+              // item.id<10?
               <View
                 style={{
                   marginTop: 20,
@@ -184,6 +185,12 @@ const Dang2_3_4 = (props) => {
                   <Text>Xóa</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                  onPress={() => {
+                    navigate('Man2', {
+                      type: 'Sửa',
+                      id: item.id,
+                    })
+                  }}
                   style={{
                     height: 60,
                     width: 60,
@@ -206,7 +213,10 @@ const Dang2_3_4 = (props) => {
             alignItems: 'center',
           }}
           onPress={() => {
-            navigate('Man2')
+            navigate('Man2', {
+              type: 'Thêm',
+              id: -1,
+            })
           }}
         >
           <Text>Thêm</Text>
