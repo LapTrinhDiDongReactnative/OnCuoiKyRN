@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import A111 from './Dang1/TruyenDuLieu/A111'
 import A112 from './Dang1/TruyenDuLieu/A112'
 import A211 from './Dang1/DangNhap/A211'
+import A212 from './Dang1/DangNhap/A212'
+import Dang2_3_4 from './Dang2_3_4/Dang2_3_4'
 
 const App = () => {
   const Stack = createNativeStackNavigator()
@@ -14,19 +16,23 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         // Quản lý các màn hình
-        initialRouteName="A211"
+        initialRouteName="Dang2_3_4"
         screenOptions={{
           headerShown: false,
         }}
       >
-        {/* Dạng 1 */}
+        {/* Dạng 1.1 */}
         <Stack.Screen name="A111" component={A111} />
         <Stack.Screen name="A112" component={A112} />
 
         {/*
-        Dạng 2
+        Dạng 1.2
         */}
         <Stack.Screen name="A211" component={A211} />
+        <Stack.Screen name="A212" component={A212} />
+
+        {/* Dạng 2, 3  */}
+        <Stack.Screen name="Dang2_3_4" component={Dang2_3_4} />
       </Stack.Navigator>
     </NavigationContainer>
   )
