@@ -12,9 +12,12 @@ import {
   View,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeColor } from '../Dang5/redux/reducer'
 
 const Dang2_3_4 = (props) => {
   const { navigation, route } = props
@@ -32,14 +35,16 @@ const Dang2_3_4 = (props) => {
         console.error(error)
       })
   }
+  const color = useSelector((state) => state.theme.color)
 
+  const dispatch = useDispatch()
   useEffect(() => {
     const interval = setInterval(() => {
       getData()
     }, 2000)
 
     return () => clearInterval(interval)
-  }, [data])
+  }, [dispatch])
 
   const [searchText, setSearchText] = useState('')
 
@@ -58,11 +63,12 @@ const Dang2_3_4 = (props) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#feffea',
+        backgroundColor: color ? color : '#feffea',
         justifyContent: 'center',
         alignItems: 'center',
       }}
     >
+      <Text>Color:{color}</Text>
       <View style={{}}>
         <TextInput
           onChangeText={(text) => {
@@ -90,27 +96,47 @@ const Dang2_3_4 = (props) => {
           justifyContent: 'space-evenly',
         }}
       >
-        <View
-          style={{
-            height: 20,
-            width: 20,
-            backgroundColor: '#d317aa',
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(changeColor('#d317aa'))
           }}
-        ></View>
-        <View
-          style={{
-            height: 20,
-            width: 20,
-            backgroundColor: '#51ef7e',
+        >
+          <View
+            style={{
+              height: 20,
+              width: 20,
+              backgroundColor: '#d317aa',
+            }}
+          ></View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(changeColor('#51ef7e'))
           }}
-        ></View>
-        <View
-          style={{
-            height: 20,
-            width: 20,
-            backgroundColor: '#caef51',
+        >
+          <View
+            style={{
+              height: 20,
+              width: 20,
+              backgroundColor: '#51ef7e',
+            }}
+          ></View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(changeColor('#caef51'))
           }}
-        ></View>
+        >
+          <View
+            style={{
+              height: 20,
+              width: 20,
+              backgroundColor: '#caef51',
+            }}
+          ></View>
+        </TouchableOpacity>
       </View>
 
       <View

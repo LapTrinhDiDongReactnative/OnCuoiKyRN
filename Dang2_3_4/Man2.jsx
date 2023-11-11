@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const Man2 = (props) => {
   const { navigation, route } = props
@@ -33,6 +34,8 @@ const Man2 = (props) => {
     }
   }
 
+  const color = useSelector((state) => state.theme.color)
+
   const updateData = async (id) => {
     try {
       const updatedUser = {
@@ -54,6 +57,7 @@ const Man2 = (props) => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: color ? color : '#fff',
       }}
     >
       <Text
