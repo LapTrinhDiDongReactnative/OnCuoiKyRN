@@ -34,7 +34,11 @@ const Dang2_3_4 = (props) => {
   }
 
   useEffect(() => {
-    getData()
+    const interval = setInterval(() => {
+      getData()
+    }, 2000)
+
+    return () => clearInterval(interval)
   }, [data])
 
   const [searchText, setSearchText] = useState('')
@@ -75,6 +79,38 @@ const Dang2_3_4 = (props) => {
           placeholder="Nhập tên Note"
           placeholderTextColor="#111"
         />
+      </View>
+
+      <View
+        style={{
+          marginTop: 20,
+          height: 50,
+          width: 400,
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+        }}
+      >
+        <View
+          style={{
+            height: 20,
+            width: 20,
+            backgroundColor: '#d317aa',
+          }}
+        ></View>
+        <View
+          style={{
+            height: 20,
+            width: 20,
+            backgroundColor: '#51ef7e',
+          }}
+        ></View>
+        <View
+          style={{
+            height: 20,
+            width: 20,
+            backgroundColor: '#caef51',
+          }}
+        ></View>
       </View>
 
       <View
