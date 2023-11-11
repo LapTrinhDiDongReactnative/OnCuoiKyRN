@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Man2 = () => {
+const A212 = () => {
   return (
     <View>
-      <Text>Man2</Text>
+      <Text>A212</Text>
     </View>
   )
 }
 
-export default Man2
+export default A212
 
 const styles = StyleSheet.create({})

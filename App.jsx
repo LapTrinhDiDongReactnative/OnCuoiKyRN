@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
-import Man2 from './Man2'
-import Man1 from './Man1'
-import Man3 from './Man3'
+import A111 from './Dang1/TruyenDuLieu/A111'
+import A112 from './Dang1/TruyenDuLieu/A112'
+import A211 from './Dang1/DangNhap/A211'
 
 const App = () => {
   const Stack = createNativeStackNavigator()
@@ -14,15 +14,19 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         // Quản lý các màn hình
-        initialRouteName="Man2"
+        initialRouteName="A211"
         screenOptions={{
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Man1" component={Man1} />
-        {/*Stack.Screen các thành phần của màn hình  */}
-        <Stack.Screen name="Man2" component={Man2} />
-        <Stack.Screen name="Man3" component={Man3} />
+        {/* Dạng 1 */}
+        <Stack.Screen name="A111" component={A111} />
+        <Stack.Screen name="A112" component={A112} />
+
+        {/*
+        Dạng 2
+        */}
+        <Stack.Screen name="A211" component={A211} />
       </Stack.Navigator>
     </NavigationContainer>
   )
