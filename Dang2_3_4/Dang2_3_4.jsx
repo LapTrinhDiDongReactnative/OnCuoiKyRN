@@ -16,11 +16,14 @@ import {
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const Dang2_3_4 = () => {
+const Dang2_3_4 = (props) => {
+  const { navigation, route } = props
+  const { navigate, goBack } = navigation
+
   const [data, setData] = useState([]) // Dữ liệu từ Fake API
 
-  const getData = () => {
-    axios
+  const getData = async () => {
+    await axios
       .get('https://654efe92358230d8f0ccf0fb.mockapi.io/Login/filter')
       .then((response) => {
         setData(response.data)
@@ -32,7 +35,9 @@ const Dang2_3_4 = () => {
 
   useEffect(() => {
     getData()
-  }, [])
+  }, [data])
+
+  const [searchText, setSearchText] = useState('')
   return (
     <View
       style={{
@@ -44,7 +49,9 @@ const Dang2_3_4 = () => {
     >
       <View style={{}}>
         <TextInput
-          onChangeText={(text) => {}}
+          onChangeText={(text) => {
+            setSearchText(text)
+          }}
           style={{
             width: 400,
             height: 60,
@@ -76,10 +83,16 @@ const Dang2_3_4 = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
+          onPress={() => {
+            setSearchText('work')
+          }}
         >
           <Text>Work</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => {
+            setSearchText('learn')
+          }}
           style={{
             height: 60,
             width: 60,
@@ -91,6 +104,9 @@ const Dang2_3_4 = () => {
           <Text>Learn</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => {
+            setSearchText('play')
+          }}
           style={{
             height: 60,
             width: 60,
@@ -104,71 +120,66 @@ const Dang2_3_4 = () => {
       </View>
 
       <ScrollView>
-        {data.map((item) => {
-          return (
-            <View
-              style={{
-                marginTop: 20,
-                width: 300,
-                backgroundColor: '#fff',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
-            >
-              <View>
-                <Text
-                  style={{
-                    marginTop: 20,
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: '#111',
-                  }}
-                >
-                  {item.name}
-                </Text>
-                <Text
-                  style={{
-                    marginTop: 20,
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: '#111',
-                  }}
-                >
-                  {item.type}
-                </Text>
-                <Text
-                  style={{
-                    marginTop: 20,
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: '#111',
-                  }}
-                >
-                  {item.description}
-                </Text>
-              </View>
-
-              <TouchableOpacity
-                style={{
-                  height: 60,
-                  width: 60,
-                  color: 'red',
-                }}
-              >
-                <Text>Xóa</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  height: 60,
-                  width: 60,
-                  color: 'yellow',
-                }}
-              >
-                <Text>sửa</Text>
-              </TouchableOpacity>
-            </View>
+        {data
+          .filter((item) =>
+            item.name.toLowerCase().includes(searchText.toLowerCase())
           )
-        })}
+          .map((item) => {
+            return (
+              <View
+                style={{
+                  marginTop: 20,
+                  width: 300,
+                  backgroundColor: '#fff',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <View>
+                  <Text
+                    style={{
+                      marginTop: 20,
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      color: '#111',
+                    }}
+                  >
+                    {item.name}
+                  </Text>
+
+                  <Text
+                    style={{
+                      marginTop: 20,
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      color: '#567f67',
+                    }}
+                  >
+                    {item.description}
+                  </Text>
+                </View>
+
+                <TouchableOpacity
+                  style={{
+                    height: 60,
+                    width: 60,
+                    color: 'red',
+                  }}
+                >
+                  <Text>Xóa</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    height: 60,
+                    width: 60,
+                    color: 'yellow',
+                  }}
+                >
+                  <Text>sửa</Text>
+                </TouchableOpacity>
+              </View>
+            )
+          })}
         <TouchableOpacity
           style={{
             marginTop: 30,
@@ -178,6 +189,9 @@ const Dang2_3_4 = () => {
             backgroundColor: '#ff8eb9',
             justifyContent: 'center',
             alignItems: 'center',
+          }}
+          onPress={() => {
+            navigate('Man2')
           }}
         >
           <Text>Thêm</Text>

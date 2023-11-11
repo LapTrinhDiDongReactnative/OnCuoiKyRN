@@ -7,6 +7,7 @@ import A112 from './Dang1/TruyenDuLieu/A112'
 import A211 from './Dang1/DangNhap/A211'
 import A212 from './Dang1/DangNhap/A212'
 import Dang2_3_4 from './Dang2_3_4/Dang2_3_4'
+import Man2 from './Dang2_3_4/Man2'
 
 const App = () => {
   const Stack = createNativeStackNavigator()
@@ -33,6 +34,7 @@ const App = () => {
 
         {/* Dạng 2, 3  */}
         <Stack.Screen name="Dang2_3_4" component={Dang2_3_4} />
+        <Stack.Screen name="Man2" component={Man2} />
       </Stack.Navigator>
     </NavigationContainer>
   )
