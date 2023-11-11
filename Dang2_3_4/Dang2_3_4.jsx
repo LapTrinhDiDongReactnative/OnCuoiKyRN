@@ -38,6 +38,18 @@ const Dang2_3_4 = (props) => {
   }, [data])
 
   const [searchText, setSearchText] = useState('')
+
+  const deleteNote = async (id) => {
+    try {
+      await axios.delete(
+        `https://654efe92358230d8f0ccf0fb.mockapi.io/Login/filter/${id}`
+      )
+      getData()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <View
       style={{
@@ -164,6 +176,9 @@ const Dang2_3_4 = (props) => {
                     height: 60,
                     width: 60,
                     color: 'red',
+                  }}
+                  onPress={() => {
+                    deleteNote(item.id)
                   }}
                 >
                   <Text>Xóa</Text>
