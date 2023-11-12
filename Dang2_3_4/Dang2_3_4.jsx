@@ -41,7 +41,7 @@ const Dang2_3_4 = (props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       getData()
-    }, 2000)
+    }, 500)
 
     return () => clearInterval(interval)
   }, [dispatch])
@@ -190,6 +190,20 @@ const Dang2_3_4 = (props) => {
           }}
         >
           <Text>Play</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setSearchText('')
+          }}
+          style={{
+            height: 60,
+            width: 60,
+            backgroundColor: '#a7b7e2',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text>All</Text>
         </TouchableOpacity>
       </View>
 
